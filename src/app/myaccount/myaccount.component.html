@@ -1,0 +1,124 @@
+<div class="wrapper">
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <!-- <img src="./../assets/background.jpg" style="width:45%;" class="rounded mx-auto d-block"> -->
+    </div>
+    <ul class="list-unstyled components">
+      <li>
+        <a class="dropdown-toggle" (click)="goHome()">
+          Home
+        </a>
+      </li>
+      <hr *ngIf="loggedIn ==true">
+      <li *ngIf="loggedIn ==true">
+        <a class="dropdown-toggle" (click)="gotoOrders()">
+          Previous orders
+        </a>
+      </li>
+      <hr>
+      <li>
+        <a class="dropdown-toggle" (click)="gotoAddress()">
+          My Address
+        </a>
+      </li>
+      <hr *ngIf="userType == 'admin'">
+      <li *ngIf="userType == 'admin'">
+        <a class="dropdown-toggle btn-link" (click)="additem()">
+          Add item
+        </a>
+      </li>
+      <hr *ngIf="userType == 'admin'">
+      <li *ngIf="userType == 'admin'">
+        <a class="dropdown-toggle btn-link" (click)="gotoDelete()">
+          Delete item
+        </a>
+      </li>
+      <hr *ngIf="loggedIn ==true">
+      <li *ngIf="loggedIn ==true">
+        <a class="dropdown-toggle btn-link" (click)="gotoMyaccount()">
+          My account
+        </a>
+      </li>
+      <hr *ngIf="userType == 'admin'">
+      <li *ngIf="userType == 'admin'">
+        <a class="btn-link">
+          Settings
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <div id="content">
+    <nav class="navbar navbar-expand-lg overide-bg-color">
+      <div class="container-fluid">
+
+        <button class="btn btn-link" id="sidebarCollapse">
+          <i class="fa fa-bars tooltips"></i>
+        </button>
+
+        <div>
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <button class="btn my-2 my-sm-0" type="submit" (click)="gotoAccount()">
+                <i class="fa fa-user"></i>
+              </button>
+              <button class="btn my-2 my-sm-0" type="submit" (click)="gotoCart()">
+                <i class="fa fa-shopping-cart"></i>
+                ({{quantity}} items)
+              </button>
+              <div *ngIf="loggedIn == true">
+                <button class="btn my-2 my-sm-0" type="submit" (click)="logout()">
+                  <i class="fa fa-sign-out"></i>
+                </button>
+              </div>
+              <div *ngIf="loggedIn == false">
+                <button class="btn btn-link" (click)="gotoLogin()">Login <i></i></button>
+                <button class="btn btn-link" (click)="gotoRegister()">Register <i></i></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="body">
+      <div class="container">
+        <!-- HTML Codes by Quackit.com -->
+
+        <!-- <button *ngIf="Pwa.promptEvent" (click)="installPwa()">
+          Install
+        </button> -->
+        <div class="spacer"></div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-8 col-lg-push-3 text-center">
+                <div class="card border-info text-center" style="width:100%; height: 310px;">
+                  <div class="card-body">
+
+                    <form class="form-signin">
+                      <input type="text" class="form-control mb-2" disabled placeholder="Email address" [(ngModel)]="email"
+                        [ngModelOptions]="{standalone: true}" required autofocus>
+                      <input type="text" class="form-control mb-2" placeholder="Address" [(ngModel)]="cellno"
+                        [ngModelOptions]="{standalone: true}" required>
+                      <input type="text" class="form-control mb-2" placeholder="Address 2" [(ngModel)]="name"
+                        [ngModelOptions]="{standalone: true}" required>
+                      <input type="text" class="form-control mb-2" disabled placeholder="City" [(ngModel)]="type"
+                        [ngModelOptions]="{standalone: true}" required>
+
+                      <a class="button_example" (click)="updateProfile()">
+                        <i class="fa fa-sign-in"></i>
+                        Update profile</a>
+                    </form>
+                  </div>
+                </div>
+                <div class="spacer"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

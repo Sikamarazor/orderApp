@@ -1,0 +1,170 @@
+<div class="wrapper">
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <div class="sidebar-header">
+      <!-- <img src="./../assets/background.jpg" style="width:45%;" class="rounded mx-auto d-block"> -->
+    </div>
+     <ul class="list-unstyled components">
+       <li>
+         <a class="dropdown-toggle" (click)="goHome()">
+           Home
+         </a>
+       </li>
+       <hr *ngIf="loggedIn ==true">
+       <li *ngIf="loggedIn ==true">
+         <a class="dropdown-toggle" (click)="gotoOrders()">
+           Previous orders
+         </a>
+       </li>
+       <hr>
+       <li>
+         <a class="dropdown-toggle" (click)="gotoAddress()">
+           My Address
+         </a>
+       </li>
+       <hr *ngIf="userType == 'admin'">
+       <li *ngIf="userType == 'admin'">
+         <a class="dropdown-toggle btn-link" (click)="additem()">
+           Add item
+         </a>
+       </li>
+       <hr *ngIf="userType == 'admin'">
+       <li *ngIf="userType == 'admin'">
+         <a class="dropdown-toggle btn-link" (click)="gotoDelete()">
+           Delete item
+         </a>
+       </li>
+       <hr *ngIf="loggedIn ==true">
+       <li *ngIf="loggedIn ==true">
+         <a class="dropdown-toggle btn-link" (click)="gotoMyaccount()">
+           My account
+         </a>
+       </li>
+       <hr *ngIf="userType == 'admin'">
+       <li *ngIf="userType == 'admin'">
+         <a class="btn-link">
+           Settings
+         </a>
+       </li>
+     </ul>
+  </nav>
+
+  <!-- Page Content -->
+  <div id="content">
+    <nav class="navbar navbar-expand-lg overide-bg-color">
+      <div class="container-fluid">
+
+        <button class="btn btn-link" id="sidebarCollapse">
+          <i class="fa fa-bars tooltips"></i>
+        </button>
+
+        <div>
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <button class="btn my-2 my-sm-0" type="submit" (click)="gotoAccount()">
+                <i class="fa fa-user"></i>
+              </button>
+              <button class="btn my-2 my-sm-0" type="submit" (click)="gotoCart()">
+                <i class="fa fa-shopping-cart"></i>
+                ({{quantity}} items)
+              </button>
+              <div *ngIf="loggedIn == true">
+                <button class="btn my-2 my-sm-0" type="submit" (click)="logout()">
+                  <i class="fa fa-sign-out"></i>
+                </button>
+              </div>
+              <div *ngIf="loggedIn == false">
+                <button class="btn btn-link" (click)="gotoLogin()">Login <i></i></button>
+                <button class="btn btn-link" (click)="gotoRegister()">Register <i></i></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="body">
+      <div class="container">
+        <!-- HTML Codes by Quackit.com -->
+
+        <!-- <button *ngIf="Pwa.promptEvent" (click)="installPwa()">
+          Install
+        </button> -->
+        <div class="spacer"></div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-lg-8 col-lg-push-3">
+                <div class="card-header">
+                  Summary
+                </div>
+                <div class="card border-info" style="width:100%; height: 410px;">
+                  <div class="card-body">
+                    <form class="form-signin">
+                      <input type="text" class="form-control mb-2" placeholder="Card holder name" [(ngModel)]="cardholder"
+                        [ngModelOptions]="{standalone: true}" required autofocus>
+                        <div class="row">
+                          <div class="col-lg-9 col-lg-push-3">
+                            <input type="number" class="form-control mb-2" placeholder="Card number" [(ngModel)]="cardno"
+                              [ngModelOptions]="{standalone: true}" required>
+                          </div>
+                          <div class="col-lg-3 col-lg-push-3">
+                            <input type="number" class="form-control mb-2" placeholder="Cvv" maxlength="3"
+                              [(ngModel)]="cvv"
+                              [ngModelOptions]="{standalone: true}" required>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-6 col-lg-push-3">
+                            <input type="text" class="form-control mb-2" placeholder="Expiry year" [(ngModel)]="expyear"
+                              [ngModelOptions]="{standalone: true}" required>
+                          </div>
+                          <div class="col-lg-6 col-lg-push-3">
+                            <input type="text" class="form-control mb-2" placeholder="Expiry month"
+                              [(ngModel)]="expmonth" [ngModelOptions]="{standalone: true}" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-6 col-lg-push-3">
+                            <div class="row">
+                              <div class="col-lg-6 col-lg-push-3">
+                                <img src="./../assets/visa.gif" style="width:45%; height: 70px;"
+                                  class="rounded mx-auto d-block">
+                              </div>
+                              <div class="col-lg-6 col-lg-push-3">
+                                <img src="./../assets/mastercard.jpg" style="width:45%; height: 70px;"
+                                  class="rounded mx-auto d-block">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 col-lg-push-3">
+
+                          </div>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="spacer"></div>
+              </div>
+              <div class="col-lg-4 col-lg-push-3 text-center">
+                <div class="card border-info text-center"
+                  style="width:100%; height: 180px; background-color: cornsilk;">
+                  <h2>Order summary</h2>
+                  <p>{{quantity}} Item(s)</p>
+                  <p>Estimated total: R{{sumPrice}}</p>
+
+                </div>
+                <div class="editanddelete">
+                  <!-- <div class="edit"><a (click)="gotoEditCard()">Edit Card</a></div> -->
+                  <a class="button_example" (click)="completePayment()">
+                    <i class="fa fa-shopping-cart"></i>
+                    Pay(Secure payment)</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
